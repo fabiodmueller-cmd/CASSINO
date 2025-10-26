@@ -40,33 +40,45 @@ const Layout = () => {
       {/* Sidebar */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-40
-        w-64 bg-gradient-to-b from-slate-900 to-slate-800 border-r border-slate-700
+        w-64 bg-gradient-to-b from-blue-900 to-indigo-900 border-r-2 border-yellow-500
         transform transition-transform duration-200 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+        <div className="p-6 border-b-2 border-yellow-500/30">
+          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400">
             SlotManager
           </h1>
-          <p className="text-sm text-slate-400 mt-1">Gestão de Caça-Níqueis</p>
+          <p className="text-sm text-blue-200 mt-1">Gestão de Caça-Níqueis</p>
         </div>
-        <nav className="px-4 space-y-2">
+        <nav className="px-4 space-y-2 py-4">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
+            const colors = {
+              '/': 'from-blue-400 to-cyan-400',
+              '/clients': 'from-purple-400 to-pink-400',
+              '/operators': 'from-green-400 to-emerald-400',
+              '/regions': 'from-orange-400 to-red-400',
+              '/machines': 'from-yellow-400 to-amber-400',
+              '/readings': 'from-indigo-400 to-purple-400',
+              '/reports': 'from-pink-400 to-rose-400',
+              '/settings': 'from-slate-400 to-gray-400',
+            };
             return (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setSidebarOpen(false)}
                 data-testid={`nav-${item.label.toLowerCase()}`}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                   isActive
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                    : 'text-slate-300 hover:bg-slate-700/50'
+                    ? 'bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 shadow-lg shadow-yellow-400/50 scale-105'
+                    : 'text-blue-100 hover:bg-blue-800/50 hover:scale-105'
                 }`}
               >
-                <Icon size={20} />
+                <div className={`${!isActive && `text-transparent bg-clip-text bg-gradient-to-r ${colors[item.path]}`}`}>
+                  <Icon size={20} />
+                </div>
                 <span className="font-medium">{item.label}</span>
               </Link>
             );
@@ -76,7 +88,7 @@ const Layout = () => {
           <button
             onClick={handleLogout}
             data-testid="logout-button"
-            className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-slate-300 hover:bg-red-500/20 hover:text-red-400 transition-all"
+            className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-red-300 hover:bg-red-500/30 hover:text-red-200 transition-all hover:scale-105 border-2 border-red-400/30 hover:border-red-400"
           >
             <LogOut size={20} />
             <span className="font-medium">Sair</span>
