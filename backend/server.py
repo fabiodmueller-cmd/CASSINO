@@ -505,6 +505,144 @@ async def delete_reading(reading_id: str, current_user: dict = Depends(get_curre
         raise HTTPException(status_code=404, detail="Reading not found")
     return {"message": "Reading deleted"}
 
+
+# ========== BACKUP & IMPORT ==========
+
+class BackupData(BaseModel):
+    clients: Optional[List[dict]] = []
+    operators: Optional[List[dict]] = []
+    regions: Optional[List[dict]] = []
+    machines: Optional[List[dict]] = []
+    readings: Optional[List[dict]] = []
+
+@api_router.post("/backup/import")
+async def import_backup(backup_data: BackupData, current_user: dict = Depends(get_current_user)):
+    """
+    Importa dados de um backup JSON.
+    Formato esperado:
+    {
+        "clients": [...],
+        "operators": [...],
+        "regions": [...],
+        "machines": [...],
+        "readings": [...]
+    }
+    """
+    imported = {
+        "clients": 0,
+        "operators": 0,
+        "regions": 0,
+        "machines": 0,
+        "readings": 0
+    }
+    errors = []
+    
+    try:
+        # Import Clients
+        if backup_data.clients:
+            for client_data in backup_data.clients:
+                try:
+                    # Convert datetime strings if present
+                    if 'created_at' in client_data and isinstance(client_data['created_at'], str):
+                        client_data['created_at'] = client_data['created_at']
+                    else:
+                        client_data['created_at'] = datetime.now(timezone.utc).isoformat()
+                    
+                    await db.clients.insert_one(client_data)
+                    imported["clients"] += 1
+                except Exception as e:
+                    errors.append(f"Client error: {str(e)}")
+        
+        # Import Operators
+        if backup_data.operators:
+            for operator_data in backup_data.operators:
+                try:
+                    if 'created_at' in operator_data and isinstance(operator_data['created_at'], str):
+                        operator_data['created_at'] = operator_data['created_at']
+                    else:
+                        operator_data['created_at'] = datetime.now(timezone.utc).isoformat()
+                    
+                    await db.operators.insert_one(operator_data)
+                    imported["operators"] += 1
+                except Exception as e:
+                    errors.append(f"Operator error: {str(e)}")
+        
+        # Import Regions
+        if backup_data.regions:
+            for region_data in backup_data.regions:
+                try:
+                    if 'created_at' in region_data and isinstance(region_data['created_at'], str):
+                        region_data['created_at'] = region_data['created_at']
+                    else:
+                        region_data['created_at'] = datetime.now(timezone.utc).isoformat()
+                    
+                    await db.regions.insert_one(region_data)
+                    imported["regions"] += 1
+                except Exception as e:
+                    errors.append(f"Region error: {str(e)}")
+        
+        # Import Machines
+        if backup_data.machines:
+            for machine_data in backup_data.machines:
+                try:
+                    if 'created_at' in machine_data and isinstance(machine_data['created_at'], str):
+                        machine_data['created_at'] = machine_data['created_at']
+                    else:
+                        machine_data['created_at'] = datetime.now(timezone.utc).isoformat()
+                    
+                    await db.machines.insert_one(machine_data)
+                    imported["machines"] += 1
+                except Exception as e:
+                    errors.append(f"Machine error: {str(e)}")
+        
+        # Import Readings
+        if backup_data.readings:
+            for reading_data in backup_data.readings:
+                try:
+                    if 'reading_date' in reading_data and isinstance(reading_data['reading_date'], str):
+                        reading_data['reading_date'] = reading_data['reading_date']
+                    if 'created_at' in reading_data and isinstance(reading_data['created_at'], str):
+                        reading_data['created_at'] = reading_data['created_at']
+                    else:
+                        reading_data['created_at'] = datetime.now(timezone.utc).isoformat()
+                    
+                    await db.readings.insert_one(reading_data)
+                    imported["readings"] += 1
+                except Exception as e:
+                    errors.append(f"Reading error: {str(e)}")
+        
+        return {
+            "success": True,
+            "imported": imported,
+            "errors": errors
+        }
+    
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Import failed: {str(e)}")
+
+@api_router.get("/backup/export")
+async def export_backup(current_user: dict = Depends(get_current_user)):
+    """
+    Exporta todos os dados do sistema em formato JSON
+    """
+    try:
+        clients = await db.clients.find({}, {"_id": 0}).to_list(10000)
+        operators = await db.operators.find({}, {"_id": 0}).to_list(10000)
+        regions = await db.regions.find({}, {"_id": 0}).to_list(10000)
+        machines = await db.machines.find({}, {"_id": 0}).to_list(10000)
+        readings = await db.readings.find({}, {"_id": 0}).to_list(10000)
+        
+        return {
+            "clients": clients,
+            "operators": operators,
+            "regions": regions,
+            "machines": machines,
+            "readings": readings,
+            "exported_at": datetime.now(timezone.utc).isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Export failed: {str(e)}")
+
 # ========== REPORTS ==========
 
 @api_router.get("/reports/dashboard")
