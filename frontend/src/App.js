@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '@/pages/Login';
 import Dashboard from '@/pages/Dashboard';
-import Clients from '@/pages/Clients';
+import Clients from '@/pages/ClientsCards';
 import Operators from '@/pages/Operators';
 import Regions from '@/pages/Regions';
 import Machines from '@/pages/Machines';
