@@ -103,86 +103,86 @@ const Dashboard = () => {
       {/* Main Financial Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Valor Bruto */}
-        <Card className="bg-gradient-to-br from-green-500/20 to-emerald-600/30 border-green-500/40 hover:scale-105 transition-transform cursor-pointer">
+        <Card className="bg-gradient-to-br from-green-600 to-emerald-700 border-2 border-yellow-500 hover:scale-105 transition-transform cursor-pointer shadow-2xl shadow-green-500/30">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-xl bg-green-500/30 backdrop-blur-sm">
-                <TrendingUp size={28} className="text-green-300" />
+              <div className="p-3 rounded-xl bg-yellow-400/30 shadow-lg">
+                <TrendingUp size={28} className="text-yellow-200" />
               </div>
-              <div className="flex items-center gap-1 text-green-300 text-sm font-semibold">
+              <div className="flex items-center gap-1 text-yellow-300 text-sm font-semibold bg-yellow-900/40 px-3 py-1 rounded-full">
                 <ArrowUpRight size={18} />
                 <span>100%</span>
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-300 mb-1 font-medium">Receita Bruta</p>
+              <p className="text-sm text-green-100 mb-1 font-medium">Receita Bruta</p>
               <p className="text-3xl font-bold text-white">
                 R$ {(stats?.total_gross || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
-              <p className="text-xs text-green-300 mt-2">Total de entrada</p>
+              <p className="text-xs text-green-200 mt-2">Total de entrada</p>
             </div>
           </CardContent>
         </Card>
 
         {/* Comissões */}
-        <Card className="bg-gradient-to-br from-orange-500/20 to-red-600/30 border-orange-500/40 hover:scale-105 transition-transform cursor-pointer">
+        <Card className="bg-gradient-to-br from-orange-600 to-red-700 border-2 border-yellow-500 hover:scale-105 transition-transform cursor-pointer shadow-2xl shadow-orange-500/30">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-xl bg-orange-500/30 backdrop-blur-sm">
-                <DollarSign size={28} className="text-orange-300" />
+              <div className="p-3 rounded-xl bg-yellow-400/30 shadow-lg">
+                <DollarSign size={28} className="text-yellow-200" />
               </div>
-              <div className="flex items-center gap-1 text-orange-300 text-sm font-semibold">
+              <div className="flex items-center gap-1 text-yellow-300 text-sm font-semibold bg-yellow-900/40 px-3 py-1 rounded-full">
                 <ArrowDownRight size={18} />
                 <span>{percentages.commissionsPercent}%</span>
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-300 mb-1 font-medium">Total Comissões</p>
+              <p className="text-sm text-orange-100 mb-1 font-medium">Total Comissões</p>
               <p className="text-3xl font-bold text-white">
                 R$ {(stats?.total_commissions || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
-              <p className="text-xs text-orange-300 mt-2">Clientes + Operadores</p>
+              <p className="text-xs text-orange-200 mt-2">Clientes + Operadores</p>
             </div>
           </CardContent>
         </Card>
 
         {/* Lucro Líquido */}
-        <Card className="bg-gradient-to-br from-blue-500/20 to-purple-600/30 border-blue-500/40 hover:scale-105 transition-transform cursor-pointer">
+        <Card className="bg-gradient-to-br from-blue-600 to-indigo-700 border-2 border-yellow-500 hover:scale-105 transition-transform cursor-pointer shadow-2xl shadow-blue-500/30">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-xl bg-blue-500/30 backdrop-blur-sm">
-                <Target size={28} className="text-blue-300" />
+              <div className="p-3 rounded-xl bg-yellow-400/30 shadow-lg">
+                <Target size={28} className="text-yellow-200" />
               </div>
-              <div className="flex items-center gap-1 text-blue-300 text-sm font-semibold">
+              <div className="flex items-center gap-1 text-yellow-300 text-sm font-semibold bg-yellow-900/40 px-3 py-1 rounded-full">
                 <ArrowUpRight size={18} />
                 <span>{percentages.netPercent}%</span>
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-300 mb-1 font-medium">Lucro Líquido</p>
+              <p className="text-sm text-blue-100 mb-1 font-medium">Lucro Líquido</p>
               <p className="text-3xl font-bold text-white">
                 R$ {(stats?.total_net || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
-              <p className="text-xs text-blue-300 mt-2">Margem: {percentages.profitMargin}%</p>
+              <p className="text-xs text-blue-200 mt-2">Margem: {percentages.profitMargin}%</p>
             </div>
           </CardContent>
         </Card>
 
         {/* Total Leituras */}
-        <Card className="bg-gradient-to-br from-purple-500/20 to-pink-600/30 border-purple-500/40 hover:scale-105 transition-transform cursor-pointer">
+        <Card className="bg-gradient-to-br from-purple-600 to-pink-700 border-2 border-yellow-500 hover:scale-105 transition-transform cursor-pointer shadow-2xl shadow-purple-500/30">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="p-3 rounded-xl bg-purple-500/30 backdrop-blur-sm">
-                <FileText size={28} className="text-purple-300" />
+              <div className="p-3 rounded-xl bg-yellow-400/30 shadow-lg">
+                <FileText size={28} className="text-yellow-200" />
               </div>
-              <div className="flex items-center gap-1 text-purple-300 text-sm">
+              <div className="flex items-center gap-1 text-yellow-300 text-sm bg-yellow-900/40 px-3 py-1 rounded-full">
                 <Zap size={18} />
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-300 mb-1 font-medium">Total Leituras</p>
+              <p className="text-sm text-purple-100 mb-1 font-medium">Total Leituras</p>
               <p className="text-3xl font-bold text-white">{stats?.total_readings || 0}</p>
-              <p className="text-xs text-purple-300 mt-2">Média: R$ {avgPerReading.toFixed(2)}</p>
+              <p className="text-xs text-purple-200 mt-2">Média: R$ {avgPerReading.toFixed(2)}</p>
             </div>
           </CardContent>
         </Card>
