@@ -166,9 +166,16 @@ const Settings = () => {
               </pre>
             </div>
 
-            <label htmlFor="backup-upload">
+            <div>
+              <input
+                id="backup-upload"
+                type="file"
+                accept=".json"
+                onChange={handleImport}
+                className="hidden"
+              />
               <Button
-                as="span"
+                onClick={() => document.getElementById('backup-upload').click()}
                 disabled={importing}
                 data-testid="import-backup-button"
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
@@ -182,14 +189,7 @@ const Settings = () => {
                   </>
                 )}
               </Button>
-              <input
-                id="backup-upload"
-                type="file"
-                accept=".json"
-                onChange={handleImport}
-                className="hidden"
-              />
-            </label>
+            </div>
           </CardContent>
         </Card>
 
