@@ -48,6 +48,7 @@ function App() {
             <Route path="machines" element={<Machines />} />
             <Route path="readings" element={<Readings />} />
             <Route path="reports" element={<Reports />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
         </Routes>
       </BrowserRouter>
