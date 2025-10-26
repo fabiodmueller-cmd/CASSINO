@@ -1,10 +1,12 @@
+import { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, UserCog, MapPin, Monitor, FileText, BarChart3, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, UserCog, MapPin, Monitor, FileText, BarChart3, LogOut, Menu, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
