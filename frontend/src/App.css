@@ -11,6 +11,7 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: #e2e8f0;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,8 +27,14 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(16px);
   border: 1px solid rgba(148, 163, 184, 0.1);
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+  .glass-card {
+    padding: 24px;
+  }
 }
 
 .stat-card {
@@ -35,8 +42,14 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(148, 163, 184, 0.15);
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+@media (min-width: 768px) {
+  .stat-card {
+    padding: 20px;
+  }
 }
 
 .stat-card:hover {
@@ -48,11 +61,19 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 8px 16px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.2s;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .btn-primary {
+    padding: 10px 24px;
+    font-size: 16px;
+  }
 }
 
 .btn-primary:hover {
@@ -64,10 +85,12 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: auto;
   border-radius: 12px;
   background: rgba(30, 41, 59, 0.4);
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
 }
 
@@ -76,17 +99,33 @@ thead {
 }
 
 th {
-  padding: 12px;
+  padding: 8px;
   text-align: left;
   font-weight: 600;
   color: #cbd5e1;
-  font-size: 14px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  th {
+    padding: 12px;
+    font-size: 14px;
+  }
 }
 
 td {
-  padding: 12px;
+  padding: 8px;
   border-top: 1px solid rgba(148, 163, 184, 0.1);
   color: #e2e8f0;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  td {
+    padding: 12px;
+    font-size: 14px;
+  }
 }
 
 tr:hover {
@@ -94,19 +133,38 @@ tr:hover {
 }
 
 .page-header {
-  margin-bottom: 32px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .page-header {
+    margin-bottom: 32px;
+  }
 }
 
 .page-title {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   color: #f1f5f9;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
 }
 
 .page-subtitle {
-  font-size: 16px;
+  font-size: 14px;
   color: #94a3b8;
+}
+
+@media (min-width: 768px) {
+  .page-subtitle {
+    font-size: 16px;
+  }
 }
 
 @keyframes fadeIn {
