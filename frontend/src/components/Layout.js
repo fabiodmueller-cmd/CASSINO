@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, UserCog, MapPin, Monitor, FileText, BarChart3, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Users, UserCog, MapPin, Monitor, FileText, BarChart3, Settings, LogOut, Menu, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const Layout = () => {
@@ -16,6 +16,7 @@ const Layout = () => {
     { path: '/machines', label: 'Máquinas', icon: Monitor },
     { path: '/readings', label: 'Leituras', icon: FileText },
     { path: '/reports', label: 'Relatórios', icon: BarChart3 },
+    { path: '/settings', label: 'Configurações', icon: Settings },
   ];
 
   const handleLogout = () => {
