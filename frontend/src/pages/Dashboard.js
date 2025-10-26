@@ -18,10 +18,11 @@ const Dashboard = () => {
 
   const fetchAllData = async () => {
     try {
-      const [statsRes, readingsRes, machinesRes] = await Promise.all([
+      const [statsRes, readingsRes, machinesRes, clientsRes] = await Promise.all([
         axios.get(`${API}/reports/dashboard`, { headers: getAuthHeaders() }),
         axios.get(`${API}/readings`, { headers: getAuthHeaders() }),
-        axios.get(`${API}/machines`, { headers: getAuthHeaders() })
+        axios.get(`${API}/machines`, { headers: getAuthHeaders() }),
+        axios.get(`${API}/clients`, { headers: getAuthHeaders() })
       ]);
       
       setStats(statsRes.data);
@@ -44,7 +45,8 @@ const Dashboard = () => {
       const topMachinesList = Object.entries(machineRevenue)
         .map(([id, revenue]) => {
           const machine = machinesRes.data.find(m => m.id === id);
-          return machine ? { ...machine, revenue } : null;
+          const client = clientsRes.data.find(c => c.id === machine?.client_id);
+          return machine ? { ...machine, revenue, clientName: client?.name || 'N/A' } : null;
         })
         .filter(Boolean)
         .sort((a, b) => b.revenue - a.revenue)
