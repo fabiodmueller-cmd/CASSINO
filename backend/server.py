@@ -143,6 +143,13 @@ class ReadingCreate(BaseModel):
     current_out: float
     reading_date: Optional[datetime] = None
 
+
+# ========== BASIC ROUTES ==========
+
+@api_router.get("/")
+async def root():
+    return {"message": "SlotManager API", "status": "running"}
+
 # ========== AUTH HELPERS ==========
 
 def hash_password(password: str) -> str:
