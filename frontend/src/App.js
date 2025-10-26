@@ -8,7 +8,7 @@ import Clients from '@/pages/Clients';
 import Operators from '@/pages/Operators';
 import Regions from '@/pages/Regions';
 import Machines from '@/pages/Machines';
-import Readings from '@/pages/Readings';
+import ReadingsCards from '@/pages/ReadingsCards';
 import Reports from '@/pages/Reports';
 import Settings from '@/pages/Settings';
 import Layout from '@/components/Layout';
