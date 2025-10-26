@@ -253,39 +253,43 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top 5 Máquinas */}
-        <Card className="bg-slate-800/60 border-slate-700 backdrop-blur-sm">
-          <CardHeader>
+        <Card className="bg-gradient-to-br from-blue-900/90 to-indigo-900/90 border-2 border-yellow-500 shadow-2xl shadow-yellow-500/20">
+          <CardHeader className="border-b border-yellow-500/30">
             <CardTitle className="flex items-center gap-2 text-white">
               <Trophy className="text-yellow-400" size={24} />
               Top 5 Máquinas por Receita
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-3">
               {topMachines.map((machine, index) => (
                 <div
                   key={machine.id}
-                  className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-slate-700/50 to-slate-800/50 border border-slate-600 hover:border-blue-500/50 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-blue-800/60 to-indigo-800/60 border-2 border-yellow-400/40 hover:border-yellow-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/20"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                      index === 0 ? 'bg-yellow-500 text-yellow-900' :
-                      index === 1 ? 'bg-gray-400 text-gray-900' :
-                      index === 2 ? 'bg-orange-600 text-orange-100' :
-                      'bg-slate-600 text-slate-200'
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg ${
+                      index === 0 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-yellow-900' :
+                      index === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-gray-900' :
+                      index === 2 ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-orange-900' :
+                      'bg-gradient-to-br from-blue-400 to-blue-600 text-blue-900'
                     }`}>
                       {index + 1}
                     </div>
                     <div>
-                      <p className="font-semibold text-white">{machine.code}</p>
-                      <p className="text-sm text-slate-400">{machine.name}</p>
+                      <p className="font-bold text-white text-lg">{machine.code}</p>
+                      <p className="text-sm text-blue-200">{machine.name}</p>
+                      <p className="text-xs text-yellow-400 flex items-center gap-1 mt-1">
+                        <Users size={12} />
+                        {machine.clientName}
+                      </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-green-400">
+                    <p className="text-xl font-bold text-green-400">
                       R$ {machine.revenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </p>
-                    <p className="text-xs text-slate-400">Mult: {machine.multiplier}</p>
+                    <p className="text-xs text-blue-300">Mult: {machine.multiplier}</p>
                   </div>
                 </div>
               ))}
@@ -294,31 +298,31 @@ const Dashboard = () => {
         </Card>
 
         {/* Últimas Leituras */}
-        <Card className="bg-slate-800/60 border-slate-700 backdrop-blur-sm">
-          <CardHeader>
+        <Card className="bg-gradient-to-br from-purple-900/90 to-pink-900/90 border-2 border-yellow-500 shadow-2xl shadow-yellow-500/20">
+          <CardHeader className="border-b border-yellow-500/30">
             <CardTitle className="flex items-center gap-2 text-white">
-              <Calendar className="text-blue-400" size={24} />
+              <Calendar className="text-yellow-400" size={24} />
               Últimas Leituras
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-3">
               {recentReadings.map((reading) => (
                 <div
                   key={reading.id}
-                  className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-slate-700/50 to-slate-800/50 border border-slate-600 hover:border-purple-500/50 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-purple-800/60 to-pink-800/60 border-2 border-yellow-400/40 hover:border-yellow-400 transition-all hover:scale-105 hover:shadow-lg hover:shadow-yellow-400/20"
                 >
                   <div>
-                    <p className="font-semibold text-white text-sm">
+                    <p className="font-semibold text-white">
                       {format(new Date(reading.reading_date), 'dd/MM/yyyy HH:mm')}
                     </p>
-                    <p className="text-xs text-slate-400 mt-1">Máquina ID: {reading.machine_id.slice(0, 8)}</p>
+                    <p className="text-xs text-purple-200 mt-1">ID: {reading.machine_id.slice(0, 8)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-bold text-green-400">
+                    <p className="text-lg font-bold text-green-400">
                       R$ {reading.gross_value.toFixed(2)}
                     </p>
-                    <p className="text-xs text-blue-400">
+                    <p className="text-xs text-blue-300">
                       Líq: R$ {reading.net_value.toFixed(2)}
                     </p>
                   </div>
