@@ -46,7 +46,7 @@ function App() {
             <Route path="operators" element={<Operators />} />
             <Route path="regions" element={<Regions />} />
             <Route path="machines" element={<Machines />} />
-            <Route path="readings" element={<Readings />} />
+            <Route path="readings" element={<ReadingsCards />} />
             <Route path="reports" element={<Reports />} />
             <Route path="settings" element={<Settings />} />
           </Route>
