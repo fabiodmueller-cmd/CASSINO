@@ -52,6 +52,7 @@ function App() {
             <Route path="reports" element={<Reports />} />
             <Route path="settings" element={<Settings />} />
             <Route path="vinculos" element={<Vinculos />} />
+            <Route path="receipt" element={<Receipt />} />
           </Route>
         </Routes>
       </BrowserRouter>
