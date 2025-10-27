@@ -278,14 +278,14 @@ const MachinesCards = () => {
               <div>
                 <Label htmlFor="operator_id">Operador (opcional)</Label>
                 <Select
-                  value={formData.operator_id}
-                  onValueChange={(value) => setFormData({ ...formData, operator_id: value })}
+                  value={formData.operator_id || "none"}
+                  onValueChange={(value) => setFormData({ ...formData, operator_id: value === "none" ? "" : value })}
                 >
                   <SelectTrigger data-testid="operator-select" className="bg-slate-700 border-slate-600">
                     <SelectValue placeholder="Selecione um operador" />
                   </SelectTrigger>
                   <SelectContent className="bg-slate-700 border-slate-600">
-                    <SelectItem value="">Nenhum</SelectItem>
+                    <SelectItem value="none">Nenhum</SelectItem>
                     {operators.map((operator) => (
                       <SelectItem key={operator.id} value={operator.id}>
                         {operator.name}
