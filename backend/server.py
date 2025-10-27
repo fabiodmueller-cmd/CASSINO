@@ -323,6 +323,15 @@ async def get_operators(current_user: dict = Depends(get_current_user)):
             o['created_at'] = datetime.fromisoformat(o['created_at'])
     return operators
 
+@api_router.get("/operators/{operator_id}", response_model=Operator)
+async def get_operator(operator_id: str, current_user: dict = Depends(get_current_user)):
+    operator = await db.operators.find_one({"id": operator_id}, {"_id": 0})
+    if not operator:
+        raise HTTPException(status_code=404, detail="Operator not found")
+    if isinstance(operator['created_at'], str):
+        operator['created_at'] = datetime.fromisoformat(operator['created_at'])
+    return Operator(**operator)
+
 @api_router.put("/operators/{operator_id}", response_model=Operator)
 async def update_operator(operator_id: str, operator_data: OperatorCreate, current_user: dict = Depends(get_current_user)):
     result = await db.operators.update_one(
