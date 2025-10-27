@@ -184,10 +184,10 @@ const ClientsWithReadings = () => {
     let operatorCommissionValue = 0;
     
     if (operatorId) {
-      const link = links.find(l => l.client_id === currentClient.id);
-      // Buscar operador nos dados carregados
-      const operatorCommission = 5; // Valor padrão, você pode buscar do backend
-      operatorCommissionValue = (gross * operatorCommission) / 100;
+      const operator = operators.find(o => o.id === operatorId);
+      if (operator) {
+        operatorCommissionValue = (gross * operator.commission_value) / 100;
+      }
     }
     
     const netValue = gross - clientCommissionValue - operatorCommissionValue;
