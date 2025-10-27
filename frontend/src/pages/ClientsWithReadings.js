@@ -110,7 +110,7 @@ const ClientsWithReadings = () => {
     setExpandedClient(expandedClient === clientId ? null : clientId);
   };
 
-  const startReading = (client, machine) => {
+  const startReading = async (client, machine) => {
     const clientMachinesList = getClientMachines(client.id);
     const startIndex = clientMachinesList.findIndex(m => m.id === machine.id);
     
@@ -119,15 +119,45 @@ const ClientsWithReadings = () => {
     setCurrentMachineIndex(startIndex);
     setCompletedReadings([]);
     
-    // Sempre começar com campos zerados - usuário digita tudo
-    setReadingForm({
-      previous_in: '',
-      previous_out: '',
-      current_in: '',
-      current_out: '',
-    });
+    // Buscar última leitura da máquina para preencher campos anteriores
+    const lastReading = await getLastReading(machine.id);
+    
+    if (lastReading) {
+      setReadingForm({
+        previous_in: lastReading.current_in.toString(),
+        previous_out: lastReading.current_out.toString(),
+        current_in: '',
+        current_out: '',
+      });
+    } else {
+      setReadingForm({
+        previous_in: '',
+        previous_out: '',
+        current_in: '',
+        current_out: '',
+      });
+    }
     
     setReadingModalOpen(true);
+  };
+
+  const getLastReading = async (machineId) => {
+    try {
+      const response = await axios.get(`${API}/readings`, {
+        headers: getAuthHeaders(),
+      });
+      
+      // Filtrar leituras desta máquina e pegar a mais recente
+      const machineReadings = response.data.filter(r => r.machine_id === machineId);
+      if (machineReadings.length === 0) return null;
+      
+      // Ordenar por data e pegar a mais recente
+      machineReadings.sort((a, b) => new Date(b.reading_date) - new Date(a.reading_date));
+      return machineReadings[0];
+    } catch (error) {
+      console.error('Erro ao buscar última leitura');
+      return null;
+    }
   };
 
   const calculateGross = () => {
