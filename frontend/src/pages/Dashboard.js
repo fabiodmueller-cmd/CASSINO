@@ -327,7 +327,11 @@ const Dashboard = () => {
                     <p className="font-semibold text-white">
                       {format(new Date(reading.reading_date), 'dd/MM/yyyy HH:mm')}
                     </p>
-                    <p className="text-xs text-purple-200 mt-1">ID: {reading.machine_id.slice(0, 8)}</p>
+                    <p className="text-sm text-purple-100 mt-1">{reading.machineName}</p>
+                    <p className="text-xs text-yellow-400 flex items-center gap-1 mt-1">
+                      <Users size={12} />
+                      {reading.clientName}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold text-green-400">
