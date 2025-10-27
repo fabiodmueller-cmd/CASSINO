@@ -158,7 +158,7 @@ Total de máquinas: ${receiptData.readings.length}
                   <div>
                     <p className="font-bold text-white">{reading.machine.code} - {reading.machine.name}</p>
                     <p className="text-sm text-slate-400">
-                      Entrada: {reading.current_in} | Saída: {reading.current_out}
+                      Multiplicador: {reading.machine.multiplier}
                     </p>
                   </div>
                   <div className="text-right">
