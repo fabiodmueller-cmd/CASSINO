@@ -470,35 +470,35 @@ const ClientsWithReadings = () => {
               </div>
             </div>
 
-            {/* Gross Value Preview */}
+            {/* Gross Value Preview - Hidden during input */}
             <div className="p-4 rounded-lg bg-yellow-500/20 border border-yellow-400">
               <div className="flex justify-between items-center">
                 <span className="text-yellow-200 font-medium">Valor Bruto (com multiplicador {currentMachine?.multiplier}):</span>
                 <span className="text-2xl font-bold text-white">
-                  R$ {calculateCommissions().gross.toFixed(2)}
+                  R$ 0,00
                 </span>
               </div>
             </div>
 
-            {/* Commissions & Net Value Preview */}
+            {/* Commissions & Net Value Preview - Hidden during input */}
             <div className="space-y-2 p-4 rounded-lg bg-slate-700/50 border border-slate-600">
-              <h4 className="text-sm font-bold text-white mb-2">Cálculos em Tempo Real:</h4>
+              <h4 className="text-sm font-bold text-white mb-2">Resumo (calculado ao salvar):</h4>
               
               <div className="flex justify-between text-sm">
                 <span className="text-blue-300">Comissão Cliente ({currentClient?.commission_value}%):</span>
-                <span className="text-blue-400 font-bold">R$ {calculateCommissions().clientCommission.toFixed(2)}</span>
+                <span className="text-blue-400 font-bold">R$ 0,00</span>
               </div>
               
               {calculateCommissions().hasOperator && (
                 <div className="flex justify-between text-sm">
                   <span className="text-green-300">Comissão Operador:</span>
-                  <span className="text-green-400 font-bold">R$ {calculateCommissions().operatorCommission.toFixed(2)}</span>
+                  <span className="text-green-400 font-bold">R$ 0,00</span>
                 </div>
               )}
               
               <div className="flex justify-between text-sm pt-2 border-t border-slate-600">
                 <span className="text-yellow-200 font-bold">Valor Líquido:</span>
-                <span className="text-yellow-400 font-bold text-lg">R$ {calculateCommissions().netValue.toFixed(2)}</span>
+                <span className="text-yellow-400 font-bold text-lg">R$ 0,00</span>
               </div>
             </div>
 
