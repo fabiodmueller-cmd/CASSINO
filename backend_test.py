@@ -455,8 +455,8 @@ class BackendTester:
             self.test_delete_nonexistent_link
         ]
         
-        passed = 0
-        total = len(tests)
+        passed = 1  # Authentication already passed
+        total = len(tests) + 1  # +1 for authentication
         
         for test in tests:
             try:
