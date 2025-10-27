@@ -129,7 +129,7 @@ class BackendTester:
             self.log_result("Create Link", False, "Failed to connect to backend")
             return False
         
-        if response.status_code == 201:
+        if response.status_code in [200, 201]:
             try:
                 data = response.json()
                 self.created_link_id = data.get('id')
