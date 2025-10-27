@@ -317,10 +317,40 @@ const Dashboard = () => {
         {/* Últimas Leituras */}
         <Card className="bg-gradient-to-br from-purple-900/90 to-pink-900/90 border-2 border-yellow-500 shadow-2xl shadow-yellow-500/20">
           <CardHeader className="border-b border-yellow-500/30">
-            <CardTitle className="flex items-center gap-2 text-white">
-              <Calendar className="text-yellow-400" size={24} />
-              Últimas Leituras
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2 text-white">
+                <Calendar className="text-yellow-400" size={24} />
+                Últimas Leituras
+              </CardTitle>
+              <Select value={daysFilter.toString()} onValueChange={(value) => setDaysFilter(Number(value))}>
+                <SelectTrigger className="w-32 bg-slate-700 border-yellow-500 text-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-slate-700 border-yellow-500">
+                  <SelectItem value="1">Hoje</SelectItem>
+                  <SelectItem value="7">7 dias</SelectItem>
+                  <SelectItem value="15">15 dias</SelectItem>
+                  <SelectItem value="30">30 dias</SelectItem>
+                  <SelectItem value="365">1 ano</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {recentReadings.length > 0 && (
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="p-3 rounded-lg bg-green-500/20 border border-green-400/30">
+                  <p className="text-xs text-green-200">Total Bruto</p>
+                  <p className="text-xl font-bold text-green-300">
+                    R$ {recentReadings.reduce((acc, r) => acc + r.gross_value, 0).toFixed(2)}
+                  </p>
+                </div>
+                <div className="p-3 rounded-lg bg-blue-500/20 border border-blue-400/30">
+                  <p className="text-xs text-blue-200">Total Líquido</p>
+                  <p className="text-xl font-bold text-blue-300">
+                    R$ {recentReadings.reduce((acc, r) => acc + r.net_value, 0).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            )}
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-3">
