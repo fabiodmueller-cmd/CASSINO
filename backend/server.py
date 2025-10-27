@@ -143,6 +143,17 @@ class ReadingCreate(BaseModel):
     current_out: float
     reading_date: Optional[datetime] = None
 
+class Link(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    client_id: str
+    operator_id: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class LinkCreate(BaseModel):
+    client_id: str
+    operator_id: str
+
 
 # ========== BASIC ROUTES ==========
 
