@@ -11,6 +11,7 @@ import Machines from '@/pages/MachinesCards';
 import ReadingsCards from '@/pages/ReadingsCards';
 import Reports from '@/pages/ReportsModern';
 import Settings from '@/pages/Settings';
+import Vinculos from '@/pages/Vinculos';
 import Layout from '@/components/Layout';
 import { Toaster } from 'sonner';
 
