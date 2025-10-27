@@ -410,6 +410,26 @@ class BackendTester:
                           f"Expected 404 status, got {response.status_code}: {response.text}")
             return False
     
+    def cleanup_existing_links(self):
+        """Clean up any existing test links"""
+        print(f"\n{Colors.BLUE}=== Cleaning up existing test links ==={Colors.ENDC}")
+        
+        if not self.token:
+            return
+        
+        # Get all existing links
+        response = self.make_request('GET', '/links')
+        if response and response.status_code == 200:
+            links = response.json()
+            
+            # Delete any links with our test client/operator combination
+            for link in links:
+                if (link.get('client_id') == TEST_CLIENT_ID and 
+                    link.get('operator_id') == TEST_OPERATOR_ID):
+                    delete_response = self.make_request('DELETE', f'/links/{link["id"]}')
+                    if delete_response and delete_response.status_code == 200:
+                        print(f"    Deleted existing test link: {link['id']}")
+    
     def run_all_tests(self):
         """Run all tests in sequence"""
         print(f"{Colors.BOLD}Starting Backend API Tests for Links (Vínculos) Functionality{Colors.ENDC}")
@@ -417,9 +437,15 @@ class BackendTester:
         print(f"Test Client ID: {TEST_CLIENT_ID}")
         print(f"Test Operator ID: {TEST_OPERATOR_ID}")
         
-        # Run tests in order
+        # First authenticate and cleanup
+        if not self.test_authentication():
+            print(f"{Colors.RED}Authentication failed, cannot continue{Colors.ENDC}")
+            return False
+        
+        self.cleanup_existing_links()
+        
+        # Run tests in order (skip authentication since we already did it)
         tests = [
-            self.test_authentication,
             self.test_create_link,
             self.test_duplicate_link_prevention,
             self.test_invalid_client_validation,
