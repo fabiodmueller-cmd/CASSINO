@@ -124,17 +124,19 @@ const Vinculos = () => {
           <h1 className="page-title">Vínculos</h1>
           <p className="page-subtitle">Vincule clientes aos operadores responsáveis</p>
         </div>
+        <Button
+          onClick={() => {
+            resetForm();
+            setOpen(true);
+          }}
+          data-testid="add-vinculo-button"
+          className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 border-2 border-yellow-500 shadow-lg shadow-indigo-500/30"
+        >
+          <Plus className="mr-2" size={20} />
+          Novo Vínculo
+        </Button>
+        
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button
-              onClick={resetForm}
-              data-testid="add-vinculo-button"
-              className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 border-2 border-yellow-500 shadow-lg shadow-indigo-500/30"
-            >
-              <Plus className="mr-2" size={20} />
-              Novo Vínculo
-            </Button>
-          </DialogTrigger>
           <DialogContent className="bg-slate-800 border-2 border-yellow-500 text-white">
             <DialogHeader>
               <DialogTitle className="text-yellow-400">Novo Vínculo</DialogTitle>
