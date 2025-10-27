@@ -466,7 +466,7 @@ const ClientsWithReadings = () => {
                 <span className="text-blue-400 font-bold">R$ {calculateCommissions().clientCommission.toFixed(2)}</span>
               </div>
               
-              {getOperatorForClient(currentClient?.id) && (
+              {calculateCommissions().hasOperator && (
                 <div className="flex justify-between text-sm">
                   <span className="text-green-300">Comissão Operador:</span>
                   <span className="text-green-400 font-bold">R$ {calculateCommissions().operatorCommission.toFixed(2)}</span>
