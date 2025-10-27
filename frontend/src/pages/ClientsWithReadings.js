@@ -219,26 +219,14 @@ const ClientsWithReadings = () => {
       // Verificar se é a última máquina
       if (currentMachineIndex < clientMachines.length - 1) {
         const nextIndex = currentMachineIndex + 1;
-        const nextMachine = clientMachines[nextIndex];
         
-        // Buscar última leitura da próxima máquina
-        const lastReading = await getLastReading(nextMachine.id);
-        
-        if (lastReading) {
-          setReadingForm({
-            previous_in: lastReading.current_in.toString(),
-            previous_out: lastReading.current_out.toString(),
-            current_in: '',
-            current_out: '',
-          });
-        } else {
-          setReadingForm({
-            previous_in: '',
-            previous_out: '',
-            current_in: '',
-            current_out: '',
-          });
-        }
+        // Resetar campos para próxima máquina - sempre zerados
+        setReadingForm({
+          previous_in: '',
+          previous_out: '',
+          current_in: '',
+          current_out: '',
+        });
         
         setCurrentMachineIndex(nextIndex);
       } else {
