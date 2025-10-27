@@ -18,6 +18,7 @@ const ClientsWithReadings = () => {
   const [clients, setClients] = useState([]);
   const [machines, setMachines] = useState([]);
   const [links, setLinks] = useState([]);
+  const [operators, setOperators] = useState([]);
   const [expandedClient, setExpandedClient] = useState(null);
   const [readingModalOpen, setReadingModalOpen] = useState(false);
   const [currentMachineIndex, setCurrentMachineIndex] = useState(0);
