@@ -27,11 +27,22 @@ const Dashboard = () => {
       
       setStats(statsRes.data);
       
-      // Pegar últimas 5 leituras
+      // Pegar últimas 5 leituras com informações da máquina e cliente
       const sorted = readingsRes.data.sort((a, b) => 
         new Date(b.reading_date) - new Date(a.reading_date)
       );
-      setRecentReadings(sorted.slice(0, 5));
+      
+      const enrichedReadings = sorted.slice(0, 5).map(reading => {
+        const machine = machinesRes.data.find(m => m.id === reading.machine_id);
+        const client = clientsRes.data.find(c => c.id === machine?.client_id);
+        return {
+          ...reading,
+          machineName: machine ? `${machine.code} - ${machine.name}` : 'N/A',
+          clientName: client?.name || 'N/A'
+        };
+      });
+      
+      setRecentReadings(enrichedReadings);
       
       // Top 5 máquinas por valor bruto
       const machineRevenue = {};
