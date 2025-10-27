@@ -169,13 +169,17 @@ const ClientsWithReadings = () => {
     const clientCommissionValue = (gross * (currentClient?.commission_value || 0)) / 100;
     
     // Comissão do operador (se houver vínculo)
-    const operatorId = getOperatorForClient(currentClient?.id);
     let operatorCommissionValue = 0;
+    let hasOperator = false;
     
-    if (operatorId) {
-      const operator = operators.find(o => o.id === operatorId);
-      if (operator) {
-        operatorCommissionValue = (gross * operator.commission_value) / 100;
+    if (currentClient?.id) {
+      const link = links.find(l => l.client_id === currentClient.id);
+      if (link && link.operator_id) {
+        const operator = operators.find(o => o.id === link.operator_id);
+        if (operator) {
+          operatorCommissionValue = (gross * operator.commission_value) / 100;
+          hasOperator = true;
+        }
       }
     }
     
@@ -185,7 +189,8 @@ const ClientsWithReadings = () => {
       gross,
       clientCommission: clientCommissionValue,
       operatorCommission: operatorCommissionValue,
-      netValue
+      netValue,
+      hasOperator
     };
   };
 
