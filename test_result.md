@@ -168,7 +168,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Vínculos functionality implementation"
+    - "Backend testing for Vínculos API endpoints"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -180,4 +180,10 @@ agent_communication:
       1. Removed DialogTrigger wrapper - now using controlled state only
       2. Fixed SelectItem empty value error - using 'none' instead of empty string
       
-      Next: Implement Vínculos functionality for client-operator commission linking.
+      Implemented Vínculos functionality:
+      1. Created backend endpoints: POST /api/links, GET /api/links, DELETE /api/links/{id}
+      2. Updated frontend to use real API
+      3. Applied same DialogTrigger fix
+      4. Added to navigation menu
+      
+      Next: Test backend API endpoints thoroughly
