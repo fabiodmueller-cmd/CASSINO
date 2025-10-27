@@ -182,9 +182,9 @@ Total de máquinas: ${receiptData.readings.length}
                 <span className="text-slate-300">Comissão Cliente ({receiptData.client.commission_value}%):</span>
                 <span className="text-lg text-blue-400 font-bold">- R$ {clientCommission.toFixed(2)}</span>
               </div>
-              {receiptData.operator && (
+              {operator && (
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-300">Comissão Operador ({receiptData.operator.commission_value}%):</span>
+                  <span className="text-slate-300">Comissão Operador ({operator.commission_value}%):</span>
                   <span className="text-lg text-green-400 font-bold">- R$ {operatorCommission.toFixed(2)}</span>
                 </div>
               )}
