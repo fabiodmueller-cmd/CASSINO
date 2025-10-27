@@ -349,18 +349,18 @@ const MachinesCards = () => {
 
               {/* Info Grid */}
               <div className="space-y-2 mb-4">
-                <div className="flex items-center gap-2 p-2 rounded-lg bg-purple-600/40 border border-purple-400/50">
-                  <Users size={16} className="text-purple-200" />
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-700/60 border border-blue-400/30">
+                  <Users size={16} className="text-blue-300" />
                   <span className="text-sm text-white font-medium">{getClientName(machine.client_id)}</span>
                 </div>
                 
-                <div className="flex items-center gap-2 p-2 rounded-lg bg-orange-600/40 border border-orange-400/50">
-                  <MapPin size={16} className="text-orange-200" />
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-700/60 border border-orange-400/30">
+                  <MapPin size={16} className="text-orange-300" />
                   <span className="text-sm text-white font-medium">{getRegionName(machine.region_id)}</span>
                 </div>
                 
-                <div className="flex items-center gap-2 p-2 rounded-lg bg-green-600/40 border border-green-400/50">
-                  <UserCog size={16} className="text-green-200" />
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-700/60 border border-green-400/30">
+                  <UserCog size={16} className="text-green-300" />
                   <span className="text-sm text-white font-medium">{getOperatorName(machine.operator_id)}</span>
                 </div>
               </div>
