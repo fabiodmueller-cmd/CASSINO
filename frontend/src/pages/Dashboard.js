@@ -33,7 +33,12 @@ const Dashboard = () => {
         new Date(b.reading_date) - new Date(a.reading_date)
       );
       
-      const enrichedReadings = sorted.slice(0, 5).map(reading => {
+      // Filtrar por dias
+      const now = new Date();
+      const daysAgo = new Date(now.getTime() - (daysFilter * 24 * 60 * 60 * 1000));
+      const filtered = sorted.filter(r => new Date(r.reading_date) >= daysAgo);
+      
+      const enrichedReadings = filtered.slice(0, 5).map(reading => {
         const machine = machinesRes.data.find(m => m.id === reading.machine_id);
         const client = clientsRes.data.find(c => c.id === machine?.client_id);
         return {
