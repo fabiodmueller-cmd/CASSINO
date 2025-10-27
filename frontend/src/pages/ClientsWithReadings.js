@@ -119,24 +119,13 @@ const ClientsWithReadings = () => {
     setCurrentMachineIndex(startIndex);
     setCompletedReadings([]);
     
-    // Buscar última leitura da máquina para preencher campos anteriores
-    const lastReading = await getLastReading(machine.id);
-    
-    if (lastReading) {
-      setReadingForm({
-        previous_in: lastReading.current_in.toString(),
-        previous_out: lastReading.current_out.toString(),
-        current_in: '',
-        current_out: '',
-      });
-    } else {
-      setReadingForm({
-        previous_in: '',
-        previous_out: '',
-        current_in: '',
-        current_out: '',
-      });
-    }
+    // Sempre começar com campos zerados - usuário digita tudo
+    setReadingForm({
+      previous_in: '',
+      previous_out: '',
+      current_in: '',
+      current_out: '',
+    });
     
     setReadingModalOpen(true);
   };
