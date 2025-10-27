@@ -517,6 +517,54 @@ async def delete_reading(reading_id: str, current_user: dict = Depends(get_curre
     return {"message": "Reading deleted"}
 
 
+# ========== LINKS (VÍNCULOS) ==========
+
+@api_router.post("/links", response_model=Link)
+async def create_link(link_data: LinkCreate, current_user: dict = Depends(get_current_user)):
+    # Check if link already exists
+    existing = await db.links.find_one({
+        "client_id": link_data.client_id,
+        "operator_id": link_data.operator_id
+    }, {"_id": 0})
+    
+    if existing:
+        raise HTTPException(status_code=400, detail="Link already exists")
+    
+    # Verify client and operator exist
+    client = await db.clients.find_one({"id": link_data.client_id}, {"_id": 0})
+    if not client:
+        raise HTTPException(status_code=404, detail="Client not found")
+    
+    operator = await db.operators.find_one({"id": link_data.operator_id}, {"_id": 0})
+    if not operator:
+        raise HTTPException(status_code=404, detail="Operator not found")
+    
+    link = Link(**link_data.model_dump())
+    doc = link.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.links.insert_one(doc)
+    return link
+
+@api_router.get("/links", response_model=List[Link])
+async def get_links(current_user: dict = Depends(get_current_user)):
+    links = await db.links.find({}, {"_id": 0}).to_list(length=None)
+    return [Link(**link) for link in links]
+
+@api_router.get("/links/{link_id}", response_model=Link)
+async def get_link(link_id: str, current_user: dict = Depends(get_current_user)):
+    link = await db.links.find_one({"id": link_id}, {"_id": 0})
+    if not link:
+        raise HTTPException(status_code=404, detail="Link not found")
+    return Link(**link)
+
+@api_router.delete("/links/{link_id}")
+async def delete_link(link_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.links.delete_one({"id": link_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Link not found")
+    return {"message": "Link deleted"}
+
+
 # ========== BACKUP & IMPORT ==========
 
 class BackupData(BaseModel):
