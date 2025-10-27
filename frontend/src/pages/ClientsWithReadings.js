@@ -110,6 +110,26 @@ const ClientsWithReadings = () => {
     setExpandedClient(expandedClient === clientId ? null : clientId);
   };
 
+  const startReading = (client, machine) => {
+    const clientMachinesList = getClientMachines(client.id);
+    const startIndex = clientMachinesList.findIndex(m => m.id === machine.id);
+    
+    setCurrentClient(client);
+    setClientMachines(clientMachinesList);
+    setCurrentMachineIndex(startIndex);
+    setCompletedReadings([]);
+    
+    // Sempre começar com campos zerados - usuário digita tudo
+    setReadingForm({
+      previous_in: '',
+      previous_out: '',
+      current_in: '',
+      current_out: '',
+    });
+    
+    setReadingModalOpen(true);
+  };
+
   const calculateGross = () => {
     const prevIn = parseFloat(readingForm.previous_in) || 0;
     const prevOut = parseFloat(readingForm.previous_out) || 0;
