@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API, getAuthHeaders } from '@/App';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
@@ -10,17 +12,34 @@ import { toast } from 'sonner';
 
 const Receipt = () => {
   const [receiptData, setReceiptData] = useState(null);
-  const [operators, setOperators] = useState([]);
+  const [operator, setOperator] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const stored = sessionStorage.getItem('receipt');
     if (stored) {
-      setReceiptData(JSON.parse(stored));
+      const data = JSON.parse(stored);
+      setReceiptData(data);
+      
+      // Buscar informações do operador se houver
+      if (data.operator) {
+        fetchOperator(data.operator);
+      }
     } else {
       navigate('/clients');
     }
   }, [navigate]);
+
+  const fetchOperator = async (operatorId) => {
+    try {
+      const response = await axios.get(`${API}/operators/${operatorId}`, {
+        headers: getAuthHeaders(),
+      });
+      setOperator(response.data);
+    } catch (error) {
+      console.error('Erro ao carregar operador');
+    }
+  };
 
   if (!receiptData) {
     return <div className="text-white">Carregando...</div>;
@@ -28,8 +47,8 @@ const Receipt = () => {
 
   const totalGross = receiptData.readings.reduce((sum, r) => sum + r.gross, 0);
   const clientCommission = (totalGross * receiptData.client.commission_value) / 100;
-  const operatorCommission = receiptData.operator 
-    ? (totalGross * receiptData.operator.commission_value) / 100 
+  const operatorCommission = operator 
+    ? (totalGross * operator.commission_value) / 100 
     : 0;
   const netValue = totalGross - clientCommission - operatorCommission;
 
@@ -49,7 +68,7 @@ ${receiptData.readings.map((r, idx) =>
 *RESUMO FINANCEIRO:*
 💰 Valor Bruto Total: R$ ${totalGross.toFixed(2)}
 📊 Comissão Cliente (${receiptData.client.commission_value}%): R$ ${clientCommission.toFixed(2)}
-${receiptData.operator ? `👨‍💼 Comissão Operador (${receiptData.operator.commission_value}%): R$ ${operatorCommission.toFixed(2)}` : ''}
+${operator ? `👨‍💼 Comissão Operador (${operator.commission_value}%): R$ ${operatorCommission.toFixed(2)}` : ''}
 ✅ Valor Líquido: R$ ${netValue.toFixed(2)}
 
 Total de máquinas: ${receiptData.readings.length}
