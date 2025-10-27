@@ -30,7 +30,8 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(response.data.user));
       
       toast.success(isRegister ? 'Conta criada com sucesso!' : 'Login realizado com sucesso!');
-      navigate('/');
+      // Sempre redirecionar para o dashboard após login
+      navigate('/', { replace: true });
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Erro ao fazer login');
     } finally {
