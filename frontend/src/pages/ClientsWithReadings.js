@@ -155,7 +155,38 @@ const ClientsWithReadings = () => {
     const currIn = parseFloat(readingForm.current_in) || 0;
     const currOut = parseFloat(readingForm.current_out) || 0;
     
-    return (currIn - prevIn) - (currOut - prevOut);
+    const rawValue = (currIn - prevIn) - (currOut - prevOut);
+    
+    // Aplicar multiplicador da máquina
+    const multiplier = currentMachine?.multiplier || 1;
+    return rawValue * multiplier;
+  };
+
+  const calculateCommissions = () => {
+    const gross = calculateGross();
+    
+    // Comissão do cliente
+    const clientCommissionValue = (gross * (currentClient?.commission_value || 0)) / 100;
+    
+    // Comissão do operador (se houver vínculo)
+    const operatorId = getOperatorForClient(currentClient?.id);
+    let operatorCommissionValue = 0;
+    
+    if (operatorId) {
+      const link = links.find(l => l.client_id === currentClient.id);
+      // Buscar operador nos dados carregados
+      const operatorCommission = 5; // Valor padrão, você pode buscar do backend
+      operatorCommissionValue = (gross * operatorCommission) / 100;
+    }
+    
+    const netValue = gross - clientCommissionValue - operatorCommissionValue;
+    
+    return {
+      gross,
+      clientCommission: clientCommissionValue,
+      operatorCommission: operatorCommissionValue,
+      netValue
+    };
   };
 
   const saveAndNext = async () => {
