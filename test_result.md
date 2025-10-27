@@ -101,3 +101,73 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  Fix the "Edit Machine" button bug and implement the "Vínculos" (Links) functionality
+  for linking clients to operators with commission tracking.
+
+backend:
+  - task: "User Authentication"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Created admin user in test_database. Login working correctly."
+
+frontend:
+  - task: "Edit Machine Dialog"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/MachinesCards.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "User reported Edit Machine button not working"
+      - working: true
+        agent: "main"
+        comment: |
+          Fixed by removing DialogTrigger and controlling dialog via state only.
+          Also fixed SelectItem empty string value error by using 'none' value.
+          Tested successfully - dialog opens and form is editable.
+  
+  - task: "Vínculos (Links) Page"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/pages/Vinculos.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Page created but core functionality not yet implemented"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Vínculos functionality implementation"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: |
+      Fixed Edit Machine button issue:
+      1. Removed DialogTrigger wrapper - now using controlled state only
+      2. Fixed SelectItem empty value error - using 'none' instead of empty string
+      
+      Next: Implement Vínculos functionality for client-operator commission linking.
