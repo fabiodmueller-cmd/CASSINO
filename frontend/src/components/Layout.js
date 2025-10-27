@@ -15,6 +15,7 @@ const Layout = () => {
     { path: '/regions', label: 'Regiões', icon: MapPin },
     { path: '/machines', label: 'Máquinas', icon: Monitor },
     { path: '/readings', label: 'Leituras', icon: FileText },
+    { path: '/vinculos', label: 'Vínculos', icon: Link2 },
     { path: '/reports', label: 'Relatórios', icon: BarChart3 },
     { path: '/settings', label: 'Configurações', icon: Settings },
   ];
