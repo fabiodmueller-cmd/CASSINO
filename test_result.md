@@ -118,6 +118,36 @@ backend:
       - working: true
         agent: "main"
         comment: "Created admin user in test_database. Login working correctly."
+      - working: true
+        agent: "testing"
+        comment: "Authentication tested successfully with admin@admin.com credentials. Token generation and validation working correctly."
+
+  - task: "Links (Vínculos) API Endpoints"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created Link and LinkCreate models, implemented POST /api/links, GET /api/links, DELETE /api/links/{id} endpoints with validation"
+      - working: true
+        agent: "testing"
+        comment: |
+          Comprehensive testing completed - ALL TESTS PASSED (8/8):
+          ✅ Authentication with admin@admin.com/admin
+          ✅ Create Link (POST /api/links) - validates client/operator existence
+          ✅ Duplicate link prevention - returns 400 with proper error message
+          ✅ Invalid client validation - returns 404 for non-existent client
+          ✅ Invalid operator validation - returns 404 for non-existent operator  
+          ✅ Get All Links (GET /api/links) - returns array of links
+          ✅ Delete Link (DELETE /api/links/{id}) - successful deletion
+          ✅ Delete non-existent link - returns 404 properly
+          
+          API endpoints working perfectly with proper validation and error handling.
+          Test data: Client ID 18ef5fc5-39ef-4cd6-b569-458858ddf534, Operator ID 6a66e43c-5066-4c41-b546-838385f83e80
 
 frontend:
   - task: "Edit Machine Dialog"
