@@ -50,6 +50,7 @@ function App() {
             <Route path="readings" element={<ReadingsCards />} />
             <Route path="reports" element={<Reports />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="vinculos" element={<Vinculos />} />
           </Route>
         </Routes>
       </BrowserRouter>
