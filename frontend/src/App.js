@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '@/pages/Login';
 import Dashboard from '@/pages/Dashboard';
-import Clients from '@/pages/ClientsCards';
+import Clients from '@/pages/ClientsWithReadings';
 import Operators from '@/pages/OperatorsCards';
 import Regions from '@/pages/RegionsCards';
 import Machines from '@/pages/MachinesCards';
@@ -12,6 +12,7 @@ import ReadingsCards from '@/pages/ReadingsCards';
 import Reports from '@/pages/ReportsModern';
 import Settings from '@/pages/Settings';
 import Vinculos from '@/pages/Vinculos';
+import Receipt from '@/pages/Receipt';
 import Layout from '@/components/Layout';
 import { Toaster } from 'sonner';
 
