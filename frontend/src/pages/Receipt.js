@@ -132,14 +132,14 @@ Total de máquinas: ${receiptData.readings.length}
           </div>
 
           {/* Operator Info (if exists) */}
-          {receiptData.operator && (
+          {operator && (
             <div className="mb-6 p-4 rounded-lg bg-green-600/20 border border-green-400/30">
               <div className="flex items-center gap-3 mb-2">
                 <UserCog size={24} className="text-green-300" />
                 <h3 className="text-xl font-bold text-white">Operador Responsável</h3>
               </div>
-              <p className="text-xl text-green-300 font-bold">{receiptData.operator.name}</p>
-              <p className="text-sm text-slate-300">Comissão: {receiptData.operator.commission_value}%</p>
+              <p className="text-xl text-green-300 font-bold">{operator.name}</p>
+              <p className="text-sm text-slate-300">Comissão: {operator.commission_value}%</p>
             </div>
           )}
 
