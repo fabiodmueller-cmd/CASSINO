@@ -239,12 +239,15 @@ const ClientsWithReadings = () => {
         headers: getAuthHeaders(),
       });
 
-      // Adicionar aos completados
-      setCompletedReadings([...completedReadings, {
+      // Criar novo array com a leitura atual
+      const newReading = {
         ...response.data,
         machine: currentMachine,
         gross: gross
-      }]);
+      };
+      
+      const updatedReadings = [...completedReadings, newReading];
+      setCompletedReadings(updatedReadings);
 
       toast.success('Leitura salva!');
 
@@ -274,20 +277,20 @@ const ClientsWithReadings = () => {
         
         setCurrentMachineIndex(nextIndex);
       } else {
-        // Finalizar e ir para comprovante
+        // Finalizar e ir para comprovante - usando o array atualizado
         setReadingModalOpen(false);
-        generateReceipt();
+        generateReceipt(updatedReadings);
       }
     } catch (error) {
       toast.error('Erro ao salvar leitura');
     }
   };
 
-  const generateReceipt = () => {
+  const generateReceipt = (readings) => {
     // Redirecionar para página de comprovante com os dados
     const receiptData = {
       client: currentClient,
-      readings: completedReadings,
+      readings: readings, // Usar o array passado como parâmetro
       operator: getOperatorForClient(currentClient.id),
       date: new Date().toISOString()
     };
