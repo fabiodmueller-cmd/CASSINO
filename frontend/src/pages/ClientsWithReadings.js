@@ -41,6 +41,7 @@ const ClientsWithReadings = () => {
     fetchMachines();
     fetchLinks();
     fetchReadings();
+    fetchOperators();
   }, []);
 
   const fetchClients = async () => {
@@ -76,6 +77,15 @@ const ClientsWithReadings = () => {
       setReadings(response.data);
     } catch (error) {
       console.error('Erro ao carregar leituras');
+    }
+  };
+
+  const fetchOperators = async () => {
+    try {
+      const response = await axios.get(`${API}/operators`, { headers: getAuthHeaders() });
+      setOperators(response.data);
+    } catch (error) {
+      console.error('Erro ao carregar operadores');
     }
   };
 
