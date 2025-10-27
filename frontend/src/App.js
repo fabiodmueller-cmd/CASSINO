@@ -9,7 +9,7 @@ import Operators from '@/pages/OperatorsCards';
 import Regions from '@/pages/RegionsCards';
 import Machines from '@/pages/MachinesCards';
 import ReadingsCards from '@/pages/ReadingsCards';
-import Reports from '@/pages/Reports';
+import Reports from '@/pages/ReportsModern';
 import Settings from '@/pages/Settings';
 import Layout from '@/components/Layout';
 import { Toaster } from 'sonner';
