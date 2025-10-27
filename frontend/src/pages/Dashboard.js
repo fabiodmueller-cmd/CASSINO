@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [recentReadings, setRecentReadings] = useState([]);
   const [topMachines, setTopMachines] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [daysFilter, setDaysFilter] = useState(7);
 
   useEffect(() => {
     fetchAllData();
