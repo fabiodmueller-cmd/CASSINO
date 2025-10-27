@@ -16,7 +16,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchAllData();
-  }, []);
+  }, [daysFilter]);
 
   const fetchAllData = async () => {
     try {
