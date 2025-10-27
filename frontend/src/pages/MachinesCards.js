@@ -176,17 +176,19 @@ const MachinesCards = () => {
           <h1 className="page-title">Máquinas</h1>
           <p className="page-subtitle">Gerencie todas as máquinas caça-níqueis</p>
         </div>
+        <Button
+          onClick={() => {
+            resetForm();
+            setOpen(true);
+          }}
+          data-testid="add-machine-button"
+          className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 border-2 border-yellow-400 shadow-lg shadow-yellow-500/30"
+        >
+          <Plus className="mr-2" size={20} />
+          Nova Máquina
+        </Button>
+        
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button
-              onClick={resetForm}
-              data-testid="add-machine-button"
-              className="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 border-2 border-yellow-400 shadow-lg shadow-yellow-500/30"
-            >
-              <Plus className="mr-2" size={20} />
-              Nova Máquina
-            </Button>
-          </DialogTrigger>
           <DialogContent className="bg-slate-800 border-2 border-yellow-500 text-white max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-yellow-400">{editingMachine ? 'Editar Máquina' : 'Nova Máquina'}</DialogTitle>
