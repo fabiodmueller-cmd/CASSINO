@@ -176,6 +176,21 @@ const ClientsWithReadings = () => {
   const calculateCommissions = () => {
     const gross = calculateGross();
     
+    // Verificar se usuário começou a digitar valores atuais
+    const hasCurrentValues = readingForm.current_in !== '' || readingForm.current_out !== '';
+    
+    // Se não digitou nada ainda, retornar zeros (máscara visual)
+    if (!hasCurrentValues) {
+      return {
+        gross: 0,
+        clientCommission: 0,
+        operatorCommission: 0,
+        netValue: 0,
+        hasOperator: false,
+        isCalculating: false
+      };
+    }
+    
     // Comissão do cliente
     const clientCommissionValue = (gross * (currentClient?.commission_value || 0)) / 100;
     
@@ -201,7 +216,8 @@ const ClientsWithReadings = () => {
       clientCommission: clientCommissionValue,
       operatorCommission: operatorCommissionValue,
       netValue,
-      hasOperator
+      hasOperator,
+      isCalculating: true
     };
   };
 
