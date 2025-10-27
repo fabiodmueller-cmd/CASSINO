@@ -53,6 +53,8 @@ function App() {
             <Route path="settings" element={<Settings />} />
             <Route path="vinculos" element={<Vinculos />} />
             <Route path="receipt" element={<Receipt />} />
+            {/* Redirect any unknown routes to dashboard */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
         </Routes>
       </BrowserRouter>
