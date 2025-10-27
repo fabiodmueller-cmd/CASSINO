@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-27T02:21:55.074337",
+  "timestamp": "2025-10-27T02:22:05.825525",
   "backend_url": "https://casino-dashboard-6.preview.emergentagent.com/api",
   "total_tests": 8,
   "passed_tests": 6,
@@ -10,56 +10,56 @@
       "success": true,
       "message": "Login successful for admin@admin.com",
       "details": null,
-      "timestamp": "2025-10-27T02:21:54.866690"
+      "timestamp": "2025-10-27T02:22:05.682446"
     },
     {
       "test": "Create Link",
       "success": false,
-      "message": "Failed with status 200: {\"id\":\"3d888684-43fa-4cf2-8d88-68bed641835b\",\"client_id\":\"18ef5fc5-39ef-4cd6-b569-458858ddf534\",\"operator_id\":\"6a66e43c-5066-4c41-b546-838385f83e80\",\"created_at\":\"2025-10-27T02:21:54.878093Z\"}",
+      "message": "Failed with status 400: {\"detail\":\"Link already exists\"}",
       "details": null,
-      "timestamp": "2025-10-27T02:21:54.895156"
+      "timestamp": "2025-10-27T02:22:05.691711"
     },
     {
       "test": "Duplicate Prevention",
       "success": true,
       "message": "Duplicate link correctly prevented",
       "details": null,
-      "timestamp": "2025-10-27T02:21:54.908637"
+      "timestamp": "2025-10-27T02:22:05.703850"
     },
     {
       "test": "Invalid Client Validation",
       "success": true,
       "message": "Invalid client correctly rejected",
       "details": null,
-      "timestamp": "2025-10-27T02:21:54.958554"
+      "timestamp": "2025-10-27T02:22:05.713566"
     },
     {
       "test": "Invalid Operator Validation",
       "success": true,
       "message": "Invalid operator correctly rejected",
       "details": null,
-      "timestamp": "2025-10-27T02:21:55.009738"
+      "timestamp": "2025-10-27T02:22:05.764985"
     },
     {
       "test": "Get All Links",
       "success": true,
       "message": "Retrieved 1 links successfully",
       "details": null,
-      "timestamp": "2025-10-27T02:21:55.023793"
+      "timestamp": "2025-10-27T02:22:05.775040"
     },
     {
       "test": "Delete Link",
       "success": false,
       "message": "No link ID available for deletion",
       "details": null,
-      "timestamp": "2025-10-27T02:21:55.023813"
+      "timestamp": "2025-10-27T02:22:05.775061"
     },
     {
       "test": "Delete Non-existent Link",
       "success": true,
       "message": "Non-existent link correctly returned 404",
       "details": null,
-      "timestamp": "2025-10-27T02:21:55.074212"
+      "timestamp": "2025-10-27T02:22:05.825363"
     }
   ]
 }
