@@ -117,14 +117,6 @@ const Vinculos = () => {
     return operator?.commission_value || 0;
   };
 
-  // Carregar vínculos do localStorage na inicialização
-  useEffect(() => {
-    const stored = localStorage.getItem('vinculos');
-    if (stored) {
-      setVinculos(JSON.parse(stored));
-    }
-  }, []);
-
   return (
     <div className="animate-fade-in space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
