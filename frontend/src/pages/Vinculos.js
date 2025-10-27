@@ -26,12 +26,12 @@ const Vinculos = () => {
 
   const fetchVinculos = async () => {
     try {
-      const response = await axios.get(`${API}/manager_clients`, {
+      const response = await axios.get(`${API}/links`, {
         headers: getAuthHeaders(),
       });
       setVinculos(response.data || []);
     } catch (error) {
-      // Se o endpoint não existir ainda, usar array vazio
+      console.error('Erro ao carregar vínculos:', error);
       setVinculos([]);
     }
   };
