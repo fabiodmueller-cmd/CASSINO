@@ -60,36 +60,19 @@ const Vinculos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Verificar se já existe esse vínculo
-    const existing = vinculos.find(
-      v => v.client_id === formData.client_id && v.operator_id === formData.operator_id
-    );
-    
-    if (existing) {
-      toast.error('Este vínculo já existe!');
-      return;
-    }
 
     try {
-      const newVinculo = {
-        id: `vinc-${Date.now()}`,
-        client_id: formData.client_id,
-        operator_id: formData.operator_id,
-        created_at: new Date().toISOString()
-      };
-      
-      // Por enquanto salvando localmente
-      // TODO: Criar endpoint no backend
-      const updatedVinculos = [...vinculos, newVinculo];
-      setVinculos(updatedVinculos);
-      localStorage.setItem('vinculos', JSON.stringify(updatedVinculos));
+      await axios.post(`${API}/links`, formData, {
+        headers: getAuthHeaders(),
+      });
       
       toast.success('Vínculo criado!');
+      fetchVinculos();
       setOpen(false);
       resetForm();
     } catch (error) {
-      toast.error('Erro ao criar vínculo');
+      const message = error.response?.data?.detail || 'Erro ao criar vínculo';
+      toast.error(message);
     }
   };
 
