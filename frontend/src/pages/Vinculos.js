@@ -80,10 +80,11 @@ const Vinculos = () => {
     if (!window.confirm('Tem certeza que deseja excluir este vínculo?')) return;
 
     try {
-      const updatedVinculos = vinculos.filter(v => v.id !== id);
-      setVinculos(updatedVinculos);
-      localStorage.setItem('vinculos', JSON.stringify(updatedVinculos));
+      await axios.delete(`${API}/links/${id}`, {
+        headers: getAuthHeaders(),
+      });
       toast.success('Vínculo excluído!');
+      fetchVinculos();
     } catch (error) {
       toast.error('Erro ao excluir vínculo');
     }
